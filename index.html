@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>EXEMPLO EDUCATIVO DE PHISHING — ALARME</title>
+  <style>
+    html, body { height:100%; margin:0; }
+    body {
+      background:#b3001b;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-family: "Segoe UI", Roboto, Arial, sans-serif;
+      color:#fff;
+      text-align:center;
+    }
+    .wrap { padding:30px; max-width:1100px; }
+    .headline {
+      font-size:64px;
+      font-weight:900;
+      text-transform:uppercase;
+      margin:0;
+      line-height:1;
+      animation: pulse 1.2s infinite;
+    }
+    .sub { margin-top:14px; font-size:18px; font-weight:700; }
+    .note {
+      margin-top:20px;
+      font-size:14px;
+      background:rgba(255,255,255,0.08);
+      padding:10px 14px;
+      border-radius:6px;
+      display:inline-block;
+    }
+    @keyframes pulse {
+      0% { transform:scale(1); opacity:1; text-shadow:0 0 0 rgba(0,0,0,0); }
+      50% { transform:scale(1.02); opacity:0.92; text-shadow:0 6px 18px rgba(0,0,0,0.25); }
+      100% { transform:scale(1); opacity:1; }
+    }
+    @media (max-width:700px) {
+      .headline { font-size:32px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap" role="main" aria-labelledby="h">
+    <h1 id="h" class="headline">EXEMPLO DE PHISHING</h1>
+    <div class="sub">MENSAGEM FICTÍCIA — APENAS PARA FINS EDUCATIVOS</div>
+  </div>
+</body>
+</html>
