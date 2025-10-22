@@ -3,50 +3,284 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>EXEMPLO EDUCATIVO DE PHISHING — ALARME</title>
+  <title>⚠️ ACESSO NÃO AUTORIZADO</title>
   <style>
-    html, body { height:100%; margin:0; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    html, body { 
+      height: 100%; 
+      overflow: hidden;
+      background: #000;
+    }
+    
     body {
-      background:#b3001b;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-family: "Segoe UI", Roboto, Arial, sans-serif;
-      color:#fff;
-      text-align:center;
+      font-family: 'Courier New', monospace;
+      color: #0f0;
+      position: relative;
     }
-    .wrap { padding:30px; max-width:1100px; }
-    .headline {
-      font-size:64px;
-      font-weight:900;
-      text-transform:uppercase;
-      margin:0;
-      line-height:1;
-      animation: pulse 1.2s infinite;
+
+    /* Fundo piscante vermelho/preto */
+    @keyframes bgFlash {
+      0%, 49% { background: #000; }
+      50%, 100% { background: #b3001b; }
     }
-    .sub { margin-top:14px; font-size:18px; font-weight:700; }
-    .note {
-      margin-top:20px;
-      font-size:14px;
-      background:rgba(255,255,255,0.08);
-      padding:10px 14px;
-      border-radius:6px;
-      display:inline-block;
+
+    .flash-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      animation: bgFlash 0.3s infinite;
+      z-index: 1;
     }
+
+    /* Container principal */
+    .container {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    /* Título principal com glitch */
+    .main-title {
+      font-size: clamp(32px, 8vw, 96px);
+      font-weight: 900;
+      color: #ff0000;
+      text-shadow: 
+        0 0 10px #ff0000,
+        0 0 20px #ff0000,
+        0 0 30px #ff0000;
+      animation: glitch 0.5s infinite, blink 0.15s infinite;
+      margin-bottom: 20px;
+      letter-spacing: 4px;
+    }
+
+    @keyframes glitch {
+      0% { transform: translate(0); }
+      20% { transform: translate(-2px, 2px); }
+      40% { transform: translate(-2px, -2px); }
+      60% { transform: translate(2px, 2px); }
+      80% { transform: translate(2px, -2px); }
+      100% { transform: translate(0); }
+    }
+
+    @keyframes blink {
+      0%, 49% { opacity: 1; }
+      50%, 100% { opacity: 0.7; }
+    }
+
+    /* Skull ASCII art */
+    .skull {
+      font-size: clamp(8px, 1.5vw, 16px);
+      color: #ff0000;
+      line-height: 1.2;
+      margin: 20px 0;
+      animation: pulse 1s infinite;
+      white-space: pre;
+    }
+
     @keyframes pulse {
-      0% { transform:scale(1); opacity:1; text-shadow:0 0 0 rgba(0,0,0,0); }
-      50% { transform:scale(1.02); opacity:0.92; text-shadow:0 6px 18px rgba(0,0,0,0.25); }
-      100% { transform:scale(1); opacity:1; }
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.05); }
     }
-    @media (max-width:700px) {
-      .headline { font-size:32px; }
+
+    /* Avisos */
+    .warning-box {
+      background: rgba(255, 0, 0, 0.2);
+      border: 3px solid #ff0000;
+      padding: 20px;
+      margin: 15px 0;
+      max-width: 800px;
+      width: 100%;
+      animation: borderBlink 0.5s infinite;
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+    }
+
+    @keyframes borderBlink {
+      0%, 49% { border-color: #ff0000; }
+      50%, 100% { border-color: #fff; }
+    }
+
+    .warning-text {
+      font-size: clamp(14px, 2.5vw, 24px);
+      color: #fff;
+      font-weight: bold;
+      margin: 10px 0;
+      text-shadow: 0 0 5px #ff0000;
+    }
+
+    /* Lista de dados sendo roubados */
+    .data-list {
+      text-align: left;
+      margin: 15px 0;
+      font-size: clamp(12px, 2vw, 18px);
+      color: #0f0;
+    }
+
+    .data-item {
+      margin: 8px 0;
+      animation: typing 0.8s infinite;
+    }
+
+    .data-item::before {
+      content: '▶ ';
+      color: #ff0000;
+      animation: blink 0.3s infinite;
+    }
+
+    @keyframes typing {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    /* Contador */
+    .counter {
+      font-size: clamp(18px, 3vw, 32px);
+      color: #ff0000;
+      font-weight: bold;
+      margin: 20px 0;
+      animation: blink 0.2s infinite;
+    }
+
+    /* Mensagem final */
+    .final-message {
+      margin-top: 30px;
+      padding: 15px;
+      background: rgba(0, 255, 0, 0.1);
+      border: 2px solid #0f0;
+      max-width: 600px;
+      font-size: clamp(12px, 2vw, 16px);
+      color: #0f0;
+    }
+
+    /* Efeito de scanlines */
+    .scanlines {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.15),
+        rgba(0, 0, 0, 0.15) 1px,
+        transparent 1px,
+        transparent 2px
+      );
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    /* Símbolos piscantes nos cantos */
+    .corner-symbol {
+      position: fixed;
+      font-size: 48px;
+      color: #ff0000;
+      animation: blink 0.2s infinite;
+      font-weight: bold;
+    }
+
+    .top-left { top: 20px; left: 20px; }
+    .top-right { top: 20px; right: 20px; }
+    .bottom-left { bottom: 20px; left: 20px; }
+    .bottom-right { bottom: 20px; right: 20px; }
+
+    @media (max-width: 768px) {
+      .skull { font-size: 8px; }
+      .warning-box { padding: 15px; margin: 10px; }
     }
   </style>
 </head>
 <body>
-  <div class="wrap" role="main" aria-labelledby="h">
-    <h1 id="h" class="headline">EXEMPLO DE PHISHING</h1>
-    <div class="sub">MENSAGEM FICTÍCIA — APENAS PARA FINS EDUCATIVOS</div>
+  <!-- Fundo piscante -->
+  <div class="flash-bg"></div>
+
+  <!-- Scanlines effect -->
+  <div class="scanlines"></div>
+
+  <!-- Símbolos nos cantos -->
+  <div class="corner-symbol top-left">⚠</div>
+  <div class="corner-symbol top-right">⚠</div>
+  <div class="corner-symbol bottom-left">☠</div>
+  <div class="corner-symbol bottom-right">☠</div>
+
+  <!-- Container principal -->
+  <div class="container">
+    <h1 class="main-title">⚠ SISTEMA HACKEADO ⚠</h1>
+
+    <div class="skull">
+        _______________
+       /               \
+      /                 \
+     |    X       X      |
+     |                   |
+     |        &lt;          |
+     |                   |
+      |   \__________/  |
+       \_____________/
+    </div>
+
+    <div class="warning-box">
+      <div class="warning-text">⚠️ ACESSO NÃO AUTORIZADO DETECTADO ⚠️</div>
+      <div class="warning-text">🔓 SEUS DADOS ESTÃO SENDO EXTRAÍDOS</div>
+    </div>
+
+    <div class="warning-box">
+      <div class="data-list">
+        <div class="data-item">Extraindo senhas salvas...</div>
+        <div class="data-item">Copiando histórico de navegação...</div>
+        <div class="data-item">Acessando dados bancários...</div>
+        <div class="data-item">Capturando informações pessoais...</div>
+        <div class="data-item">Enviando arquivos para servidor remoto...</div>
+        <div class="data-item">Instalando backdoor permanente...</div>
+      </div>
+    </div>
+
+    <div class="counter">
+      ⏱️ TEMPO DECORRIDO: <span id="timer">00:00</span>
+    </div>
+
+    <div class="warning-box">
+      <div class="warning-text">🚨 TODOS OS SEUS DISPOSITIVOS FORAM COMPROMETIDOS 🚨</div>
+      <div class="warning-text">💀 NÃO DESLIGUE O COMPUTADOR 💀</div>
+    </div>
+
+    <div class="final-message">
+      ✅ ISTO É APENAS UM EXEMPLO EDUCATIVO<br>
+      📚 Demonstração de como páginas maliciosas podem parecer<br>
+      🛡️ Sempre verifique URLs e nunca clique em links suspeitos<br>
+      ⚠️ NENHUM DADO REAL FOI COMPROMETIDO
+    </div>
   </div>
+
+  <script>
+    // Contador de tempo
+    let seconds = 0;
+    const timerElement = document.getElementById('timer');
+    
+    setInterval(() => {
+      seconds++;
+      const mins = Math.floor(seconds / 60).toString().padStart(2, '0');
+      const secs = (seconds % 60).toString().padStart(2, '0');
+      timerElement.textContent = `${mins}:${secs}`;
+    }, 1000);
+
+    // Efeito sonoro de alerta (opcional - comentado para não incomodar)
+    // const beep = () => {
+    //   const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    //   const oscillator = audioContext.createOscillator();
+    //   oscillator.frequency.value = 800;
+    //   oscillator.connect(audioContext.destination);
+    //   oscillator.start();
+    //   oscillator.stop(audioContext.currentTime + 0.1);
+    // };
+    // setInterval(beep, 1000);
+  </script>
 </body>
 </html>
